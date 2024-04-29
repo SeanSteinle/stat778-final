@@ -59,6 +59,8 @@ def calc_acceptance_prob(theta: tuple, theta_prime: tuple, data: np.ndarray, sea
     return acceptance_ratio
 
 #bayesian functions
+#most of this code is deeply inspired by: https://medium.com/@tinonucera/bayesian-linear-regression-from-scratch-a-metropolis-hastings-implementation-63526857f191
+#which was the only example of a bayesian approximation of a target distribution that I could find.
 def likelihood(theta: tuple, data: np.ndarray):
     """Calculates the likelihood component of our linear model by measuring our parameters theta on the given data."""
     a,b,sigma = theta
