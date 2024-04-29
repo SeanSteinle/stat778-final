@@ -99,7 +99,7 @@ def plot_convergence(df: pd.DataFrame):
     plt.legend()
     
 #highest level functions to coordinate runs
-def compare_convergences(starting_positions: list, data: np.ndarray, n_samples: int=20000, adaptive: bool=False, show_plots: bool=False, out_dir: str=''):
+def compare_convergences(starting_positions: list, data: np.ndarray, n_samples: int=20000, adaptive: bool=False, out_dir: str=''):
     """High-level function that coordinates many rounds of the Metropolis-Hastings algorithm,
     each starting at a different position."""
     dfs = []
@@ -126,7 +126,7 @@ def compare_convergences(starting_positions: list, data: np.ndarray, n_samples: 
         plt.ylabel(param)
         plt.title(f"Evolution of {param.upper()} Parameter Estimate from Different Starts")
         plt.savefig(f'{out_dir}{param}_estimate_evolution_{"adaptive" if adaptive else "nonadaptive"}.jpg', bbox_inches='tight')
-        if show_plots: plt.show()
+        plt.show()
         plt.clf()
         
     #autocorrelation plots (I use the ACF metric from statsmodels, see more here: https://github.com/statsmodels/statsmodels/blob/c22837f0632ae8890f56886460c429ebf356bd9b/statsmodels/tsa/stattools.py#L579)
@@ -140,7 +140,7 @@ def compare_convergences(starting_positions: list, data: np.ndarray, n_samples: 
         plt.ylabel(f'Autocorrelation with Lag {lag}')
         plt.title(f"Autocorrelation for {param.upper()} Parameter Estimate from Different Starts")
         plt.savefig(f'{out_dir}{param}_autocorrelation_{"adaptive" if adaptive else "nonadaptive"}.jpg', bbox_inches='tight')
-        if show_plots: plt.show()
+        plt.show()
         plt.clf()
         
     df.to_csv(f'{out_dir}results.csv')
